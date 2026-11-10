@@ -9,11 +9,11 @@ This project resolves fundamental data engineering challenges inherent in raw cl
 | Metric | Production Value | Mathematical & Attribution Logic | 
 | ----- | ----- | ----- | 
 | **Total Sessions** | **356.6K** ($356,626$) | $\text{COUNT(DISTINCT } unique\_session\_id \text{)}$ across entire dataset | 
-| **Total Realized Revenue** | **\$362.17K** ($\$362,168.00$) | $\sum(\text{session\_revenue})$ | 
-| **Average Order Value (AOV)** | **\$74.70** | $\sum(\text{session\_revenue}) \div \operatorname{NULLIF}(\sum(\text{has\_purchase}), 0)$ | 
-| **Overall Conversion Rate** | **1.36%** | $\sum(\text{has\_purchase}) \div \operatorname{NULLIF}(\text{COUNT(DISTINCT } unique\_session\_id \text{)}, 0)$ ($4,848 \div 356,626$) | 
-| **Cart Abandoned Sessions** | **12,340** | $\sum(\text{CASE WHEN } has\_cart = 1 \text{ AND } has\_purchase = 0 \text{ THEN } 1 \text{ ELSE } 0 \text{ END})$ | 
-| **Lost Pipeline Opportunity** | **\$921.85K** | $\sum(\text{is\_cart\_abandoned}) \times \left(\sum\text{session\_revenue} \div \operatorname{NULLIF}(\sum\text{has\_purchase}, 0)\right)$ | 
+| **Total Realized Revenue** | **\$362.17K** ($\$362,168.00$) | $\sum(\text{session revenue})$ | 
+| **Average Order Value (AOV)** | **\$74.70** | $\sum(\text{session revenue}) \div {NULLIF}(\sum(\text{has purchase}), 0)$ | 
+| **Overall Conversion Rate** | **1.36%** | $\sum(\text{has purchase}) \div {NULLIF}(\text{COUNT(DISTINCT } unique session id \text{)}, 0)$ ($4,848 \div 356,626$) | 
+| **Cart Abandoned Sessions** | **12,340** | $\sum(\text{CASE WHEN } has cart = 1 \text{ AND } has purchase = 0 \text{ THEN } 1 \text{ ELSE } 0 \text{ END})$ | 
+| **Lost Pipeline Opportunity** | **\$921.85K** | $\sum(\text{is cart abandoned}) \times \left(\sum\text{session revenue} \div {NULLIF}(\sum\text{has purchase}, 0)\right)$ | 
 
 ## Architecture Overview
 
@@ -98,14 +98,14 @@ Sequential Funnel          Acquisition Mix        Executive KPIs              Lo
 * **The Solution:** Base views export additive building blocks (`session_revenue`, `has_purchase`, `is_cart_abandoned`). Looker Studio evaluates weighted metrics dynamically:
 
 $$
-\text{Dynamic Lost Pipeline Revenue} = \sum(\text{is\_cart\_abandoned}) \times \left(\frac{\sum\text{session\_revenue}}{\operatorname{NULLIF}(\sum\text{has\_purchase}, 0)}\right)
+\text{Dynamic Lost Pipeline Revenue} = \sum(\text{is cart abandoned}) \times \left(\frac{\sum\text{session revenue}}{{NULLIF}(\sum\text{has purchase}, 0)}\right)
 $$
 
-* **Mobile:** $4,897 \text{ abandoned} \times \$73.57 \text{ AOV} = \mathbf{\$360.27K}$
+* **Mobile:** 4,897 abandoned * $73.57 AOV = $360.27K
 
-* **Desktop:** $7,184 \text{ abandoned} \times \$75.96 \text{ AOV} = \mathbf{\$545.70K}$
+* **Desktop:** 7,184 abandoned * $75.96 AOV = $545.70K
 
-* **Tablet:** $259 \text{ abandoned} \times \$63.29 \text{ AOV} = \mathbf{\$16.39K}$
+* **Tablet:** 259 abandoned * $63.29 AOV = $16.39K
 
 ### 4. Resolving Ambiguous City Geocoding
 
