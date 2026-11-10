@@ -4,6 +4,16 @@ An enterprise-grade e-commerce analytics dashboard and dimensional data model en
 
 This project resolves fundamental data engineering challenges inherent in raw clickstream event-streams: **grain mismatch**, **midnight boundary date attribution errors**, **non-linear checkout paths**, and **cart abandonment pipeline valuation**.
 
+---
+
+![Dashboard](assets/dashboard_overview.png)
+
+---
+
+![funnel_breakdown](assets/funnel_breakdown.png)
+
+---
+
 ## Executive Summary & Performance Metrics
 
 | Metric | Production Value | Mathematical & Attribution Logic | 
