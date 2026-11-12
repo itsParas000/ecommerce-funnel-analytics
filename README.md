@@ -5,7 +5,8 @@ An enterprise-grade e-commerce analytics dashboard and dimensional data model en
 This project resolves fundamental data engineering challenges inherent in raw clickstream event-streams: **grain mismatch**, **midnight boundary date attribution errors**, **non-linear checkout paths**, and **cart abandonment pipeline valuation**.
 
 ---
-
+## Live Demo
+Check out the live dashboard [here](https://datastudio.google.com/u/0/reporting/c795a25b-2ec4-4f95-a113-5bd74d4bf37e/page/Vk8CG)
 ![Dashboard](assets/dashboard_overview.png)
 
 ---
